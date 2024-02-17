@@ -1,0 +1,28 @@
+
+memo = {1:0, 2:1, 3:2, 4:4}
+def getRes(target):
+    global res
+    res = 0
+    def dfs(i, curr):
+        global res, memo
+        if curr == target:
+            res += 1
+            return
+        if i >= target or curr > target: return
+        if i in memo and target - i in memo:
+            print(f"ShortCut: {i}:{memo[i]} {target-i}:{memo[target-i]}")
+            res += memo[i] + memo[target-i]
+        else:
+            dfs(i, curr + i)
+            dfs(i+1, curr)
+    
+    dfs(1,0)
+    return res 
+
+masterTarget = 6
+for i in range(5,masterTarget+1):
+    memo[i] = getRes(i)
+    # print(f"{i}:{memo[i]}")
+
+
+
